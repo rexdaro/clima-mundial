@@ -96,19 +96,57 @@ button:focus-visible {
 }
 
 #tarjeta-clima{
-  background-color: #164d7c;
+  background-color: #ffffffc5;
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
   margin: 2rem;
+  color: #1a1a1a;
+  /* font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  font-weight: 600;  
 }
 
 .button-cerrar{
-  height: 2rem;
+  height: 2.5rem;
+  opacity: 65%;
 }
 
 .imagen-clima{
   width: 4rem;
+  height: 4rem;
 }
 
+.container{
+  
+  margin: 0;
+
+
+}
+
+.div-button-eliminar{
+  
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.div-contenido{
+  display: flex;
+  align-items: center;
+}
+
+
+.div-button-eliminar, .div-contenido{
+  margin: 0 0 0.5rem 0;
+}
+
+.div-contenido p {
+  max-width: 6rem;
+  margin: 1rem;
+}
+
+body{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}

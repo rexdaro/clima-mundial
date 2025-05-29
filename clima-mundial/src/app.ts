@@ -2,28 +2,28 @@ import './style.css';
 
 
 
-interface Persona {
-  nombre: string,
-  saludo: string,
-  edad: number,
+// interface Persona {
+//   nombre: string,
+//   saludo: string,
+//   edad: number,
 
-}
+// }
 
-const personaManu: Persona = {
-  nombre: 'Manuel Rivas',
-  saludo: 'Hola mucho gusto',
-  edad: 27,
+// const personaManu: Persona = {
+//   nombre: 'Manuel Rivas',
+//   saludo: 'Hola mucho gusto',
+//   edad: 27,
 
-}
+// }
 
-const saludar = (persona: Persona): void => {
+// const saludar = (persona: Persona): void => {
 
-  console.log(`${persona.saludo}, soy ${persona.nombre} y tengo ${persona.edad} años.`);
-  return
-}
+//   console.log(`${persona.saludo}, soy ${persona.nombre} y tengo ${persona.edad} años.`);
+//   return
+// }
 
 
-saludar(personaManu);
+//saludar(personaManu);
 
 // Proyecto del Clima con TypeScript
 // Sigue las instrucciones paso a paso. Si no entiendes algo, ¡pregunta!
@@ -57,16 +57,6 @@ const getClima = async(ciudad: string): Promise<ClimaData> => {
   return datos; 
 }
 
-getClima('puerto ordaz')
-.then(datos => {
-  console.log(`Clima en ${datos.name}`);
-  console.log(`- Temperatura: ${datos.main.temp}°C`);
-  console.log(`- Humedad: ${datos.main.humidity}%`);
-  console.log(`- Descripción: ${datos.weather[0].description}`);
-})
-.catch(error => {
-  console.error('Error', error.message);
-})
 
 
 
@@ -79,37 +69,46 @@ const divResultado = document.getElementById('resultado') as HTMLDivElement | nu
 
 
 const mostrarClima = (data: ClimaData): void => {
-  const tarjetaClima = document.createElement('div')
+  const tarjetaClima: HTMLDivElement = document.createElement('div')
   tarjetaClima.id = 'tarjeta-clima';
 
-  const buttonEliminar = document.createElement('img');
+  const divButtonEliminar: HTMLDivElement = document.createElement('div');
+  divButtonEliminar.className = 'div-button-eliminar';
+
+  const divContenido: HTMLDivElement = document.createElement('div');
+  divContenido.className = 'div-contenido';
+
+  const buttonEliminar: HTMLImageElement = document.createElement('img');
   buttonEliminar.className = 'button-cerrar';
   buttonEliminar.src = '/src/images/icono-cerrar.svg';
   
   
-  let ciudad = document.createElement('p');
-  ciudad.textContent = `Hoy ${data.name} esta: ${data.weather[0].description}`
+  let ciudad: HTMLParagraphElement = document.createElement('p');
+  ciudad.textContent = `Hoy en ${data.name} esta: ${data.weather[0].description}`
 
-  let temperatura = document.createElement('p');
-  temperatura.textContent = `Temperatura: °${data.main.temp}`
+  let temperatura: HTMLParagraphElement = document.createElement('p');
+  temperatura.textContent = `Temperatura: ${data.main.temp} °C`
 
-    let humedad = document.createElement('p');
-  humedad.textContent = `Humedad: ${data.main.humidity}`
+  let humedad: HTMLParagraphElement = document.createElement('p');
+  humedad.textContent = `Humedad: ${data.main.humidity}%`
 
-  let img = document.createElement('img');
+  let img: HTMLImageElement = document.createElement('img');
   img.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
   img.className = 'imagen-clima';
 
-  if(tarjetaClima){
-    tarjetaClima.appendChild(buttonEliminar);
-    tarjetaClima.appendChild(ciudad);
-    tarjetaClima.appendChild(img);
-    tarjetaClima.appendChild(temperatura);
-    tarjetaClima.appendChild(humedad);
+  
 
-  }
+  divButtonEliminar.appendChild(buttonEliminar);
+
   
+  divContenido.appendChild(temperatura);
+  divContenido.appendChild(humedad);
+  divContenido.appendChild(img);
+
+  tarjetaClima.appendChild(divButtonEliminar);
+  tarjetaClima.appendChild(divContenido);
   
+  tarjetaClima.appendChild(ciudad);  
 
   divResultado?.appendChild(tarjetaClima);
 
@@ -120,7 +119,7 @@ const mostrarClima = (data: ClimaData): void => {
 
 
 // funcion para cargar clima:
-const cargarClima = async (ciudad: string) => {
+const cargarClima = async (ciudad: string): Promise<void> => {
   try {
     const datos = await getClima(ciudad);
     mostrarClima(datos);
@@ -140,5 +139,14 @@ const buttonBuscar = document.getElementById('buscar') as HTMLButtonElement | nu
 if (buttonBuscar && input) {
   buttonBuscar.addEventListener('click', () => {
     cargarClima(input.value);
+    input.value = '';
   })
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter'){
+    cargarClima(input.value);
+    input.value = '';
+    }
+  })
+
 }
