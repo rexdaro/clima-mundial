@@ -145,6 +145,16 @@ button:focus-visible {
   margin: 1rem;
 }
 
+footer{
+    text-align: center;    
+    margin: 0;
+    margin-bottom: 0.8rem;
+    font-size: 0.75rem;    
+    color: #ffffff;    
+    width: 100%;
+    margin: 0;
+}
+
 body{
   display: flex;
   text-align: center;
