@@ -72,9 +72,10 @@ getClima('puerto ordaz')
 
 
 
-// mostrando el clima en html
+// mostrando el clima en html ..
 
-const divResultado = document.getElementById('resultado');
+const divResultado = document.getElementById('resultado') as HTMLDivElement | null;
+
 
 
 const mostrarClima = (data: ClimaData): void => {
@@ -105,7 +106,6 @@ const mostrarClima = (data: ClimaData): void => {
     tarjetaClima.appendChild(img);
     tarjetaClima.appendChild(temperatura);
     tarjetaClima.appendChild(humedad);
-
 
   }
   
